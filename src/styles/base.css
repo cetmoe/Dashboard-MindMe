@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz@8..144&family=Roboto+Mono&display=swap');
+
+body {
+  margin: 0;
+}
+
+.main-container {
+  padding-left: 250px;
+}
+
+.m-1 {
+  margin: 1em;
+}
+
+.p-t-1 {
+  padding-top: 1em;
+}
+
+.p-l-1 {
+  padding-left: 1em;
+}

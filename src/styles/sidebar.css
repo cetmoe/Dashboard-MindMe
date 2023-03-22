@@ -1,0 +1,51 @@
+.sidebar {
+  position: fixed;
+  width: 250px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: #282b52;
+  color: white;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.sidebar-title {
+  font-family: 'Roboto Mono', monospace;
+  padding-top: 1em;
+  font-size: 2em;
+  font-weight: 600;
+  margin: 0 auto;
+  width: fit-content;
+  padding-bottom: 1em;
+}
+
+.nav-cat {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 1em;
+  font-weight: 600;
+  padding-bottom: 0.2em;
+}
+
+.sidebar-content {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  border-top: 1px solid #ffffff;
+  font-family: 'Roboto Flex', sans-serif;
+}
+
+.sidebar-nav-item {
+  padding: 8px 30px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.sidebar-nav-item:hover {
+  background-color: #ffffff;
+  color: black;
+}
