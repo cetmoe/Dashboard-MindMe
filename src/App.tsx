@@ -1,8 +1,4 @@
-import React, {
-  useEffect,
-  useState,
-  useContext,
-} from 'react';
+import React, { useEffect, useState } from 'react';
 import { oauth2 as SMART } from 'fhirclient';
 import Client from 'fhirclient/lib/Client';
 import {
@@ -12,7 +8,8 @@ import {
 
 import Dashboard from './components/Dashboard';
 import Launcher from './components/Launcher';
-import { FhirClientContext } from './FhirClientContext';
+import { RecoilRoot, useRecoilState } from 'recoil';
+import { fhirState } from './recoil_state';
 
 const router = createBrowserRouter([
   {
@@ -25,25 +22,26 @@ const router = createBrowserRouter([
   },
 ]);
 
-let init = false;
-
 const App = () => {
-  const [client, setClient] = useState<Client>();
+  const [fhir, setFhir] = useRecoilState(fhirState);
+  let initialized = false;
 
   useEffect(() => {
-    if (!init) {
-      init = true;
+    if (!initialized) {
       SMART.ready().then((client) => {
-        setClient(client);
+        setFhir({
+          client: client,
+          init: true,
+        });
       });
     }
+
+    return () => {
+      initialized = true;
+    };
   }, []);
 
-  return (
-    <FhirClientContext.Provider value={{ client: client }}>
-      <RouterProvider router={router} />
-    </FhirClientContext.Provider>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
