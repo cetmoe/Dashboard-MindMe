@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
-import { FhirClientContext } from '../FhirClientContext';
 import { R4 } from '@ahryman40k/ts-fhir-types';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { fhirState, patientState } from '../recoil_state';

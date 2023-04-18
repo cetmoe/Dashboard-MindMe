@@ -1,7 +1,12 @@
 import React from 'react';
 import '../styles/sidebar.css';
+import { patientState } from '../recoil_state';
+import { useRecoilState } from 'recoil';
 
 const Sidebar = () => {
+  const [patient, setPatient] =
+    useRecoilState(patientState);
+
   return (
     <div className='sidebar flex-column'>
       <div className='sidebar-title'>MindMe</div>
@@ -10,7 +15,17 @@ const Sidebar = () => {
           <div className='nav-cat'>Behandler</div>
           <div className='user-info'>Oddbjørn Hove</div>
           <div className='nav-cat p-t-1'>Pasient</div>
-          <div className='user-info'>Roland Gundersen</div>
+          {patient ? (
+            <div className='user-info'>
+              {`${patient.name![0].given} ${
+                patient.name![0].family
+              }`}
+            </div>
+          ) : (
+            <div className='user-info'>
+              No patient selected
+            </div>
+          )}
         </div>
       </div>
       <div className='sidebar-content'>

@@ -6,10 +6,10 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 
-import Dashboard from './components/Dashboard';
-import Launcher from './components/Launcher';
 import { RecoilRoot, useRecoilState } from 'recoil';
 import { fhirState } from './recoil_state';
+import Dashboard from './components/Dashboard';
+import Launcher from './components/Launcher';
 
 const router = createBrowserRouter([
   {
