@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "launch": "sh launch.sh"
   },
   "dependencies": {
     "@ahryman40k/ts-fhir-types": "^4.0.39",
