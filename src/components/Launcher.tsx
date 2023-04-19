@@ -8,8 +8,8 @@ const Launcher = () => {
     if (ignore == false) {
       SMART.authorize({
         iss: 'https://api.dips.no/fhir',
-        redirectUri: '/app',
-        client_id: 'hello-open-dips-app',
+        redirectUri: '/mindme',
+        client_id: 'dashboard-mindme',
         scope: 'openid offline_access',
       });
     }
