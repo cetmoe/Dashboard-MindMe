@@ -1,11 +1,11 @@
 .sidebar {
   position: fixed;
-  width: 250px;
+  width: 300px;
   top: 0;
   bottom: 0;
   left: 0;
   z-index: 1000;
-  background-color: #282b52;
+  background-color: #1c69b1;
   color: white;
 }
 

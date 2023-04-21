@@ -1,39 +1,35 @@
 import React from 'react';
 import '../styles/sidebar.css';
-import { patientState } from '../recoil_state';
-import { useRecoilState } from 'recoil';
+import { fhirState, patientState } from '../recoil_state';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import LoginInfo from './LoginInfo';
+import Login from './Login';
 
 const Sidebar = () => {
+  const fhir = useRecoilValue(fhirState);
   const [patient, setPatient] =
     useRecoilState(patientState);
+  let specialist: any;
 
   return (
     <div className='sidebar flex-column'>
       <div className='sidebar-title'>MindMe</div>
       <div className='sidebar-content'>
-        <div className='m-1'>
-          <div className='nav-cat'>Behandler</div>
-          <div className='user-info'>Oddbjørn Hove</div>
-          <div className='nav-cat p-t-1'>Pasient</div>
-          {patient ? (
-            <div className='user-info'>
-              {`${patient.name![0].given} ${
-                patient.name![0].family
-              }`}
-            </div>
-          ) : (
-            <div className='user-info'>
-              No patient selected
-            </div>
-          )}
-        </div>
+        {fhir.client != null ? (
+          <LoginInfo
+            patient={patient}
+            specialist={specialist}
+          />
+        ) : (
+          <Login />
+        )}
       </div>
       <div className='sidebar-content'>
         <div className='nav-cat p-l-1'>Handlinger</div>
         <div className='sidebar-nav-item'>Search</div>
-        <div className='sidebar-nav-item'>Read</div>
-        <div className='sidebar-nav-item'>Adjust</div>
-        <div className='sidebar-nav-item'>Blabla</div>
+        <div className='sidebar-nav-item'>
+          Create Vital Signs
+        </div>
       </div>
     </div>
   );

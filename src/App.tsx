@@ -10,15 +10,16 @@ import { RecoilRoot, useRecoilState } from 'recoil';
 import { fhirState } from './recoil_state';
 import Dashboard from './components/Dashboard';
 import Launcher from './components/Launcher';
+import ClientReady from './components/ClientReady';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Launcher />,
+    element: <Dashboard />,
   },
   {
-    path: '/app',
-    element: <Dashboard />,
+    path: '/mindme',
+    element: <ClientReady />,
   },
 ]);
 
@@ -28,19 +29,22 @@ const App = () => {
 
   useEffect(() => {
     if (!initialized) {
-      SMART.ready().then((client) => {
-        setFhir({
-          client: client,
-          init: true,
+      SMART.ready()
+        .then((client) => {
+          setFhir({
+            client: client,
+            init: true,
+          });
+        })
+        .catch((e) => {
+          //do nothing
         });
-      });
     }
 
     return () => {
       initialized = true;
     };
   }, []);
-
   return <RouterProvider router={router} />;
 };
 

@@ -9,7 +9,8 @@ const Launcher = () => {
       SMART.authorize({
         iss: 'https://api.dips.no/fhir',
         redirectUri: '/mindme',
-        client_id: 'dashboard-mindme',
+        clientId: 'dashboard-mindme',
+        clientSecret: import.meta.env.VITE_CLIENT_SECRET,
         scope: 'openid offline_access',
       });
     }
