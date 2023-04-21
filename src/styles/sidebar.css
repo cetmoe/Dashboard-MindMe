@@ -26,7 +26,6 @@
 }
 
 .nav-cat {
-  font-family: 'Roboto Flex', sans-serif;
   font-size: 1em;
   font-weight: 600;
   padding-bottom: 0.2em;
@@ -48,4 +47,9 @@
 .sidebar-nav-item:hover {
   background-color: #ffffff;
   color: black;
+}
+
+.bottom-sidebar {
+  margin-top: auto;
+  margin-bottom: 1em;
 }

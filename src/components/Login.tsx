@@ -9,6 +9,9 @@ const Login = () => {
       iss: 'https://api.dips.no/fhir',
       redirectUri: '/mindme',
       clientId: 'dashboard-mindme',
+      // Should not be done in a production environment
+      // The browser cannot securely hold the client secret
+      // it is a better solution to do api calls on a server
       clientSecret: import.meta.env.VITE_CLIENT_SECRET,
       scope: 'openid offline_access',
     });

@@ -12,7 +12,7 @@ const Dashboard = () => {
     useRecoilState(patientState);
 
   useEffect(() => {
-    if (fhir.client) {
+    if (fhir.client && !patient) {
       fetchPatientById(
         'cdp1000807',
         fhir.client,

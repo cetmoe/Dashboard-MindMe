@@ -18,10 +18,12 @@ const ClientReady = () => {
           init: true,
         });
       });
+
+      navigate('/');
     };
 
     if (!initialized) {
-      onClient().then(() => navigate('/'));
+      onClient();
     }
 
     return () => {
