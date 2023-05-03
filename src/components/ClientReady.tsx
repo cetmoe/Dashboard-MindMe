@@ -12,12 +12,17 @@ const ClientReady = () => {
 
   useEffect(() => {
     const onClient = async () => {
-      await SMART.ready().then((client) => {
-        setFhir({
-          client: client,
-          init: true,
+      await SMART.ready()
+        .then((client) => {
+          setFhir({
+            client: client,
+            init: true,
+          });
+        })
+        .catch((e) => {
+          console.log(e);
+          navigate('/');
         });
-      });
 
       navigate('/');
     };

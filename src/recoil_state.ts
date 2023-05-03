@@ -1,4 +1,4 @@
-import { R4 } from '@ahryman40k/ts-fhir-types';
+import { Patient } from 'fhir/r4b';
 import Client from 'fhirclient/lib/Client';
 import { RecoilState, atom, selector } from 'recoil';
 
@@ -15,7 +15,7 @@ const fhirState = atom<IFhirState>({
   },
 });
 
-const patientState = atom<R4.IPatient | null>({
+const patientState = atom<Patient | null>({
   key: 'Patient',
   default: null,
 });

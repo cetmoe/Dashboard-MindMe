@@ -1,9 +1,9 @@
-import { R4 } from '@ahryman40k/ts-fhir-types';
 import React from 'react';
 import '../styles/sidebar.css';
+import { Patient } from 'fhir/r4b';
 
 interface ILoginInfo {
-  patient: R4.IPatient | null;
+  patient: Patient | null;
   specialist: any | null;
 }
 

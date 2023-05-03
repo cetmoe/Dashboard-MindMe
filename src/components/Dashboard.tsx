@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
-import { R4 } from '@ahryman40k/ts-fhir-types';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { fhirState, patientState } from '../recoil_state';
 import { fetchPatientById } from '../fhir_fetch';
+import PatientDemographics from './PatientDemographics';
+import VitalSigns from './VitalSigns';
 
 // utvid
 const Dashboard = () => {
@@ -25,7 +26,8 @@ const Dashboard = () => {
     <>
       <Sidebar />
       <div className='main-container'>
-        {patient ? patient.name![0].given : 'no patient'}
+        <PatientDemographics />
+        <VitalSigns />
       </div>
     </>
   );

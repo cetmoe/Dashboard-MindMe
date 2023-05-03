@@ -1,11 +1,11 @@
-import { R4 } from '@ahryman40k/ts-fhir-types';
+import { Patient } from 'fhir/r4b';
 import Client from 'fhirclient/lib/Client';
 import { SetterOrUpdater } from 'recoil';
 
 const fetchPatientById = async (
   id: string,
   client: Client,
-  setter: SetterOrUpdater<R4.IPatient | null>
+  setter: SetterOrUpdater<Patient | null>
 ) => {
   await client
     .request({
