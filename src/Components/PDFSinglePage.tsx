@@ -10,15 +10,21 @@ interface strOrBuf {
 const PDFSinglePage = ({ base64string }: strOrBuf) => {
   if (!base64string) return <></>;
 
-  const [numPages, setNumPages] = useState(null);
+  const [numPages, setNumPages] = useState<number | null>(
+    null
+  );
   const [pageNumber, setPageNumber] = useState(1);
 
-  function onDocumentLoadSuccess({ numPages }) {
+  function onDocumentLoadSuccess({
+    numPages,
+  }: {
+    numPages: number;
+  }) {
     setNumPages(numPages);
     setPageNumber(1);
   }
 
-  function changePage(offset) {
+  function changePage(offset: number) {
     setPageNumber(
       (prevPageNumber) => prevPageNumber + offset
     );
@@ -31,6 +37,7 @@ const PDFSinglePage = ({ base64string }: strOrBuf) => {
   function nextPage() {
     changePage(1);
   }
+  if (numPages === null) return <></>;
 
   return (
     <>
