@@ -1,21 +1,22 @@
 import React from 'react';
 import '../styles/sidebar.css';
-import { Patient } from 'fhir/r4b';
+import { Patient, Practitioner } from 'fhir/r4';
 
 interface ILoginInfo {
   patient: Patient | null;
-  specialist: any | null;
+  practitioner: Practitioner | null;
 }
 
-const LoginInfo = ({ patient, specialist }: ILoginInfo) => {
+const UserPatientInfo = ({
+  patient,
+  practitioner,
+}: ILoginInfo) => {
   return (
     <div className='m-1'>
       <div className='nav-cat'>Behandler</div>
-      {specialist ? (
+      {practitioner ? (
         <div className='user-info'>
-          {`${specialist.name![0].given} ${
-            specialist.name![0].family
-          }`}
+          {`${practitioner.name?.[0].given} ${practitioner.name?.[0].family}`}
         </div>
       ) : (
         <div className='user-info'>
@@ -25,9 +26,7 @@ const LoginInfo = ({ patient, specialist }: ILoginInfo) => {
       <div className='nav-cat p-t-1'>Pasient</div>
       {patient ? (
         <div className='user-info'>
-          {`${patient.name![0].given} ${
-            patient.name![0].family
-          }`}
+          {`${patient.name?.[0].given} ${patient.name?.[0].family}`}
         </div>
       ) : (
         <div className='user-info'>No patient selected</div>
@@ -36,4 +35,4 @@ const LoginInfo = ({ patient, specialist }: ILoginInfo) => {
   );
 };
 
-export default LoginInfo;
+export default UserPatientInfo;

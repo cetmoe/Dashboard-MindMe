@@ -1,23 +1,26 @@
 import React from 'react';
-import '../styles/sidebar.css';
-import { fhirState, patientState } from '../recoil_state';
+import '../../styles/sidebar.css';
 import {
-  useRecoilState,
+  fhirState,
+  patientState,
+  practitionerState,
+} from '../../recoilState';
+import {
   useRecoilValue,
   useResetRecoilState,
 } from 'recoil';
-import LoginInfo from './LoginInfo';
-import Login from './Login';
+import UserPatientInfo from '../DemoInfo';
+import AuthenticateClient from '../AuthenticateClient';
 import Button from './Button';
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   const fhir = useRecoilValue(fhirState);
-  const [patient, setPatient] =
-    useRecoilState(patientState);
-  let specialist: any;
+  const patient = useRecoilValue(patientState);
+  const practitioner = useRecoilValue(practitionerState);
+
   const resetClient = useResetRecoilState(fhirState);
   const resetPatient = useResetRecoilState(patientState);
-
   const handleLogout = () => {
     resetClient();
     resetPatient();
@@ -28,17 +31,22 @@ const Sidebar = () => {
       <div className='sidebar-title'>MindMe</div>
       <div className='sidebar-content'>
         {fhir.client != null ? (
-          <LoginInfo
+          <UserPatientInfo
             patient={patient}
-            specialist={specialist}
+            practitioner={practitioner}
           />
         ) : (
-          <Login />
+          <AuthenticateClient />
         )}
       </div>
       <div className='sidebar-content'>
         <div className='nav-cat p-l-1'>Handlinger</div>
-        <div className='sidebar-nav-item'>Search</div>
+        <Link className='sidebar-nav-item' to='/'>
+          Home
+        </Link>
+        <Link className='sidebar-nav-item' to='/patients'>
+          Search for Patients
+        </Link>
         <div className='sidebar-nav-item'>
           Create Vital Signs
         </div>

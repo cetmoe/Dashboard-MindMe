@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { oauth2 as SMART } from 'fhirclient';
-import Client from 'fhirclient/lib/Client';
 import {
   createBrowserRouter,
   RouterProvider,
 } from 'react-router-dom';
 
-import { RecoilRoot, useRecoilState } from 'recoil';
-import { fhirState } from './recoil_state';
+import { useSetRecoilState } from 'recoil';
+import { fhirState } from './recoilState';
 import Dashboard from './components/Dashboard';
-import Launcher from './components/Launcher';
 import ClientReady from './components/ClientReady';
+import Patients from './components/Patients';
 
 const router = createBrowserRouter([
   {
@@ -21,10 +20,14 @@ const router = createBrowserRouter([
     path: '/mindme',
     element: <ClientReady />,
   },
+  {
+    path: '/patients',
+    element: <Patients />,
+  },
 ]);
 
 const App = () => {
-  const [fhir, setFhir] = useRecoilState(fhirState);
+  const setFhir = useSetRecoilState(fhirState);
   let initialized = false;
 
   useEffect(() => {
@@ -37,7 +40,7 @@ const App = () => {
           });
         })
         .catch((e) => {
-          //do nothing
+          console.log('error: ', e);
         });
     }
 

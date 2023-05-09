@@ -16,6 +16,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "../Oldstuff/components"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

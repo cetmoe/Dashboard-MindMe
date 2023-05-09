@@ -1,6 +1,6 @@
 import React from 'react';
-import { fhirState, patientState } from '../recoil_state';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { patientState } from '../recoilState';
+import { useRecoilValue } from 'recoil';
 
 const PatientDemographics = () => {
   const patient = useRecoilValue(patientState);
@@ -9,8 +9,8 @@ const PatientDemographics = () => {
     <>
       {patient ? (
         <div className='patient-demographics'>
-          {patient.name![0].given}
-          {patient.name![0].family}
+          {patient.name?.[0].given}
+          {patient.name?.[0].family}
           {patient.gender}
           {patient.birthDate}
           {patient.maritalStatus?.text}

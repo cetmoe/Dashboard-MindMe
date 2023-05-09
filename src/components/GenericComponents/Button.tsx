@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface IButton {
-  text: String;
+  text: string;
   handleClick: () => void;
   children?: React.ReactNode;
 }

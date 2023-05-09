@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
-import { fhirState } from '../recoil_state';
+import { useSetRecoilState } from 'recoil';
+import { fhirState } from '../recoilState';
 import { oauth2 as SMART } from 'fhirclient';
 import Client from 'fhirclient/lib/Client';
 import { useNavigate } from 'react-router-dom';
 
 const ClientReady = () => {
-  const [fhir, setFhir] = useRecoilState(fhirState);
+  const setFhir = useSetRecoilState(fhirState);
   let initialized = false;
   const navigate = useNavigate();
 
@@ -21,7 +21,6 @@ const ClientReady = () => {
         })
         .catch((e) => {
           console.log(e);
-          navigate('/');
         });
 
       navigate('/');
