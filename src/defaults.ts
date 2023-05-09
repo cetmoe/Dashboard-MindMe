@@ -2,9 +2,9 @@ import { Practitioner } from 'fhir/r4';
 
 const defaultPractitioner: Practitioner = {
   resourceType: 'Practitioner',
-  id: 'stf1000099',
+  id: 'stf2008174',
   meta: {
-    lastUpdated: '2004-10-06T08:49:12+02:00',
+    lastUpdated: '2009-01-29T14:03:34+01:00',
     profile: ['DIPSPractitioner', 'NoBasisPractitioner'],
     tag: [
       {
@@ -25,18 +25,18 @@ const defaultPractitioner: Practitioner = {
       use: 'official',
       system:
         'http://dips.no/fhir/namingsystem/dips-personid',
-      value: '1000099',
+      value: '2008174',
     },
   ],
   active: true,
   name: [
     {
-      family: 'Innleggelse (Testplan Pas-Team)',
-      given: ['Anne'],
+      family: 'Scrum',
+      given: ['Amalie'],
     },
   ],
-  gender: 'unknown',
-  birthDate: '1968-03-12',
+  gender: 'female',
+  birthDate: '1962-01-14',
 };
 
 export { defaultPractitioner };

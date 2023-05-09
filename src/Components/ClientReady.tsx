@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { fhirState } from '../recoilState';
 import { oauth2 as SMART } from 'fhirclient';
-import Client from 'fhirclient/lib/Client';
 import { useNavigate } from 'react-router-dom';
 
 const ClientReady = () => {

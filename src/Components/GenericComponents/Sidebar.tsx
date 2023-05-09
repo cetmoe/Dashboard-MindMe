@@ -47,9 +47,15 @@ const Sidebar = () => {
         <Link className='sidebar-nav-item' to='/patients'>
           Search for Patients
         </Link>
-        <div className='sidebar-nav-item'>
-          Create Vital Signs
-        </div>
+        <Link
+          className='sidebar-nav-item'
+          to='/create-document'
+        >
+          Create Document Reference
+        </Link>
+        <Link className='sidebar-nav-item' to='/documents'>
+          View Patient Documents
+        </Link>
       </div>
       <div className='bottom-sidebar'>
         {fhir.client ? (

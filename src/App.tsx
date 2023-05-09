@@ -5,11 +5,18 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 
+import { pdfjs } from 'react-pdf';
+
 import { useSetRecoilState } from 'recoil';
 import { fhirState } from './recoilState';
-import Dashboard from './components/Dashboard';
-import ClientReady from './components/ClientReady';
-import Patients from './components/Patients';
+import Dashboard from './Routes/Dashboard';
+import ClientReady from './Components/ClientReady';
+import Patients from './Routes/Patients';
+import CreateDocument from './Routes/CreateDocument';
+import PatientDocuments from './Routes/PatientDocuments';
+import ViewDocument from './Routes/ViewDocument';
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 const router = createBrowserRouter([
   {
@@ -23,6 +30,18 @@ const router = createBrowserRouter([
   {
     path: '/patients',
     element: <Patients />,
+  },
+  {
+    path: '/create-document',
+    element: <CreateDocument />,
+  },
+  {
+    path: '/documents',
+    element: <PatientDocuments />,
+  },
+  {
+    path: '/document/:id',
+    element: <ViewDocument />,
   },
 ]);
 

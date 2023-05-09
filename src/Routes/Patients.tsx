@@ -9,8 +9,8 @@ import {
   patientListState,
   patientState,
 } from '../recoilState';
-import Sidebar from './GenericComponents/Sidebar';
-import SearchField from './GenericComponents/SearchField';
+import Sidebar from '../Components/GenericComponents/Sidebar';
+import SearchField from '../Components/GenericComponents/SearchField';
 import { Patient } from 'fhir/r4';
 import { Bundle } from 'fhir/r4';
 
@@ -51,9 +51,8 @@ const Patients = () => {
               <th>Given</th>
               <th>Family</th>
               <th>Id</th>
-              <th>Address</th>
               <th>Gender</th>
-              <th>Use</th>
+              <th>Set Patient</th>
             </tr>
           </thead>
           <tbody>
@@ -62,13 +61,12 @@ const Patients = () => {
                 <td>{patient?.name?.[0].given}</td>
                 <td>{patient?.name?.[0].family}</td>
                 <td>{patient?.id}</td>
-                <td>{patient?.address?.[0].text}</td>
                 <td>{patient?.gender}</td>
                 <td>
                   <button
                     onClick={() => setPatient(patient)}
                   >
-                    Set as current patient
+                    Set
                   </button>
                 </td>
               </tr>

@@ -1,11 +1,21 @@
-import { Patient, Practitioner } from 'fhir/r4';
+import {
+  DocumentReference,
+  Patient,
+  Practitioner,
+} from 'fhir/r4';
 import Client from 'fhirclient/lib/Client';
 import { atom } from 'recoil';
 import { defaultPractitioner } from './defaults';
+import { type } from 'os';
 
 interface IFhirState {
   client: Client | null;
   init: boolean;
+}
+
+interface IDocumentListState {
+  patientId: string | null;
+  list: DocumentReference[];
 }
 
 const fhirState = atom<IFhirState>({
@@ -31,9 +41,20 @@ const patientListState = atom<Patient[]>({
   default: [] as Patient[],
 });
 
+const documentListState = atom<IDocumentListState>({
+  key: 'DocumentList',
+  default: {
+    patientId: null,
+    list: [] as DocumentReference[],
+  },
+});
+
 export {
   fhirState,
   patientState,
   patientListState,
   practitionerState,
+  documentListState,
 };
+
+export type { IFhirState, IDocumentListState };

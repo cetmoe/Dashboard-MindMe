@@ -1,6 +1,6 @@
 import React from 'react';
-import Sidebar from './GenericComponents/Sidebar';
-import PatientDemographics from './PatientDemographics';
+import Sidebar from '../Components/GenericComponents/Sidebar';
+import PatientDemographics from '../Components/PatientDemographics';
 
 // utvid
 const Dashboard = () => {
