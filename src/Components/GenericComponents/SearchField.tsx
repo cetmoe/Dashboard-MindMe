@@ -1,26 +1,62 @@
 import React, { useState } from 'react';
 
-interface ISearcField {
-  handleClick: (arg: string) => void;
+interface ISearchParams {
+  given?: string;
+  family?: string;
+}
+
+interface ISearchField {
+  handleClick: ({ given, family }: ISearchParams) => void;
   children?: React.ReactNode;
 }
 
-const SearchField = ({ handleClick }: ISearcField) => {
-  const [searchValue, setSearchValue] =
-    useState<string>('');
+const SearchField = ({ handleClick }: ISearchField) => {
+  const [searchValues, setSearchValues] =
+    useState<ISearchParams>({});
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setSearchValue(e?.currentTarget.value);
+    setSearchValues({
+      ...searchValues,
+      [e.target.id]: e.target.value,
+    });
+
+    console.log({
+      ...searchValues,
+      [e.target.id]: e.target.value,
+    });
   };
 
   return (
-    <div>
-      <input onChange={handleChange} type='search'></input>
-      <button onClick={() => handleClick(searchValue)}>
-        Search
-      </button>
+    <div className='row g-3 m-4'>
+      <div className='col'>
+        <input
+          onChange={handleChange}
+          className='form-control'
+          id='given'
+          type='search'
+          placeholder='First name'
+        />
+      </div>
+      <div className='col'>
+        <input
+          onChange={handleChange}
+          className='form-control'
+          id='family'
+          type='search'
+          placeholder='Last name'
+        />
+      </div>
+
+      <div className='col'>
+        <button
+          onClick={() => handleClick(searchValues)}
+          className='btn btn-outline-primary w-100'
+        >
+          Search
+        </button>
+      </div>
     </div>
   );
 };

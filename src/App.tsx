@@ -14,7 +14,7 @@ import { fhirState } from './recoilState';
 import Dashboard from './Routes/Dashboard';
 import ClientReady from './Components/ClientReady';
 import Patients from './Routes/Patients';
-import CreateDocument from './Routes/CreateDocument';
+import UploadDocument from './Routes/UploadDocument';
 import PatientDocuments from './Routes/PatientDocuments';
 import ViewDocument from './Routes/ViewDocument';
 
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/create-document',
-    element: <CreateDocument />,
+    element: <UploadDocument />,
   },
   {
     path: '/documents',

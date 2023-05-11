@@ -7,7 +7,6 @@ import {
   documentListState,
   IDocumentListState,
 } from '../recoilState';
-import Sidebar from '../Components/GenericComponents/Sidebar';
 import { useNavigate } from 'react-router-dom';
 import Base from './Base';
 
@@ -76,6 +75,7 @@ const PatientDocuments = () => {
           onClick={() =>
             FindDocuments(patient.id as string)
           }
+          className='btn btn-outline-primary'
         >
           Refresh
         </button>

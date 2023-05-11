@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import Sidebar from '../Components/GenericComponents/Sidebar';
+import React, { useRef, useState } from 'react';
 import {
   ConstructDocRef,
   DataURLToBase64,
@@ -9,10 +8,14 @@ import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import { useRecoilValue } from 'recoil';
 import { fhirState, patientState } from '../recoilState';
 import Base from './Base';
+import Toast from '../Components/GenericComponents/Toast';
 
-const CreateDocument = () => {
+const UploadDocument = () => {
   const [data, setData] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [status, setStatus] = useState<boolean>(false);
+
+  const toastRef = useRef<HTMLDivElement>(null);
 
   const fhir = useRecoilValue(fhirState);
   const patient = useRecoilValue(patientState);
@@ -53,27 +56,45 @@ const CreateDocument = () => {
             .VITE_DIPS_SUBSCRIPTION_KEY,
         },
       })
-      .then(() => setLoading(false))
+      .then(() => {
+        setLoading(false);
+        setStatus(true);
+        showToast();
+      })
       .catch((e) => {
         console.log(e);
         setLoading(false);
+        setStatus(false);
+        showToast();
       });
+  };
+
+  const showToast = () => {
+    if (toastRef.current) {
+      toastRef.current.classList.add('show');
+    }
   };
 
   return (
     <Base>
-      <h1>Create Document</h1>
-      <p>Creates a PDF document for the given patient.</p>
-      <label>
-        {'Select a PDF document: '}
-        <input
-          onChange={HandleFileChange}
-          type='file'
-          accept='application/pdf'
-        />
-      </label>
+      <h1>Upload Document</h1>
+      <p>
+        Uploads a PDF document for the given patient to Open
+        DIPS journal.
+      </p>
+      <label>{'Select a PDF document: '}</label>
+      <br />
+      <div></div>
+      <input
+        onChange={HandleFileChange}
+        type='file'
+        className='mt-2 form-control'
+        accept='application/pdf'
+      />
+      <br />
       <button
         onClick={() => PostDocument(data)}
+        className='btn btn-outline-primary mt-2'
         disabled={!data || !patient || loading}
       >
         {loading ? (
@@ -86,11 +107,21 @@ const CreateDocument = () => {
             Sending...
           </>
         ) : (
-          'Submit'
+          'Submit to Open DIPS'
         )}
       </button>
+      <Toast
+        toastRef={toastRef}
+        icon={status ? 'check2-all' : 'x-circle'}
+        title={status ? 'Success' : 'Error'}
+        message={
+          status
+            ? 'PDF Document uploaded successfully.'
+            : 'Failed to upload PDF document.'
+        }
+      />
     </Base>
   );
 };
 
-export default CreateDocument;
+export default UploadDocument;

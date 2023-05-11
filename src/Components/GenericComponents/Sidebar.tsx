@@ -1,28 +1,23 @@
 import React from 'react';
-import {
-  fhirState,
-  patientState,
-  practitionerState,
-} from '../../recoilState';
+import { fhirState, patientState } from '../../recoilState';
 import {
   useRecoilValue,
   useResetRecoilState,
 } from 'recoil';
-import UserPatientInfo from '../DemoInfo';
 import AuthenticateClient from '../AuthenticateClient';
 import Button from './Button';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import PatientDemographics from '../PatientDemographics';
 
 const Sidebar = () => {
   const fhir = useRecoilValue(fhirState);
-  const patient = useRecoilValue(patientState);
-  const practitioner = useRecoilValue(practitionerState);
 
   const resetClient = useResetRecoilState(fhirState);
   const resetPatient = useResetRecoilState(patientState);
   const handleLogout = () => {
     resetClient();
     resetPatient();
+    sessionStorage.clear();
   };
 
   return (
@@ -49,7 +44,7 @@ const Sidebar = () => {
             className='nav-link link-dark'
             to='/create-document'
           >
-            Create Document
+            Upload Document
           </NavLink>
         </li>
         <li className='nav-item'>
@@ -61,6 +56,7 @@ const Sidebar = () => {
           </NavLink>
         </li>
       </ul>
+      <PatientDemographics />
       <div className='text-center mt-auto p-2'>
         {fhir.client ? (
           <Button
@@ -70,6 +66,7 @@ const Sidebar = () => {
         ) : (
           <AuthenticateClient />
         )}
+        d
       </div>
     </div>
   );

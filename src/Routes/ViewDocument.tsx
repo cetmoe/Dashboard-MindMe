@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Sidebar from '../Components/GenericComponents/Sidebar';
 import PDFSinglePage from '../Components/PDFSinglePage';
 import { fhirState } from '../recoilState';
 import { useRecoilValue } from 'recoil';

@@ -5,12 +5,10 @@ import { useRecoilValue } from 'recoil';
 const PatientDemographics = () => {
   const patient = useRecoilValue(patientState);
 
-  const fields = ['id', 'gender', 'birthDate'];
-
   if (!patient) return null;
   return (
     <>
-      <div className='card w-25'>
+      <div className='card w-100 mt-5'>
         <div className='card-body'>
           <h5 className='card-title'>
             {patient.name?.[0].given +

@@ -10,7 +10,7 @@ const Button = ({ text, handleClick }: IButton) => {
   return (
     <div
       onClick={() => handleClick()}
-      className='btn btn-primary'
+      className='btn btn-outline-primary'
     >
       {text}
     </div>
