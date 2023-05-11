@@ -4,6 +4,7 @@ import PDFSinglePage from '../Components/PDFSinglePage';
 import { fhirState } from '../recoilState';
 import { useRecoilValue } from 'recoil';
 import { useNavigate, useParams } from 'react-router-dom';
+import Base from './Base';
 
 const ViewDocument = () => {
   const fhir = useRecoilValue(fhirState);
@@ -41,12 +42,9 @@ const ViewDocument = () => {
   }, []);
 
   return (
-    <>
-      <Sidebar />
-      <div className='main-container'>
-        <PDFSinglePage base64string={data} />
-      </div>
-    </>
+    <Base>
+      <PDFSinglePage base64string={data} />
+    </Base>
   );
 };
 

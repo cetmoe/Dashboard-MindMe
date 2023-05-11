@@ -1,6 +1,5 @@
 import React from 'react';
 import { oauth2 as SMART } from 'fhirclient';
-import '../styles/sidebar.css';
 import Button from './GenericComponents/Button';
 
 const AuthenticateClient = () => {

@@ -13,9 +13,11 @@ import Sidebar from '../Components/GenericComponents/Sidebar';
 import SearchField from '../Components/GenericComponents/SearchField';
 import { Patient } from 'fhir/r4';
 import { Bundle } from 'fhir/r4';
+import Base from './Base';
 
 const Patients = () => {
-  const setPatient = useSetRecoilState(patientState);
+  const [patient, setPatient] =
+    useRecoilState(patientState);
   const fhir = useRecoilValue(fhirState);
   const [patients, setPatients] = useRecoilState(
     patientListState
@@ -41,40 +43,47 @@ const Patients = () => {
   };
 
   return (
-    <>
-      <Sidebar />
-      <div className='main-container'>
-        <SearchField handleClick={findPatient} />
-        <table>
-          <thead>
-            <tr>
-              <th>Given</th>
-              <th>Family</th>
-              <th>Id</th>
-              <th>Gender</th>
-              <th>Set Patient</th>
+    <Base>
+      <h1>Patients</h1>
+      <p>
+        Search for patients by given name. An empty search
+        will list all patients.
+      </p>
+      <SearchField handleClick={findPatient} />
+      <table className='table table-striped'>
+        <thead>
+          <tr>
+            <th scope='col'>Given</th>
+            <th>Family</th>
+            <th>Id</th>
+            <th>Gender</th>
+            <th>Set Patient</th>
+          </tr>
+        </thead>
+        <tbody>
+          {patients.map((p) => (
+            <tr
+              key={p.id}
+              className={
+                patient && p == patient
+                  ? 'bg-warning-subtle'
+                  : 'opacity-75'
+              }
+            >
+              <td>{p?.name?.[0].given}</td>
+              <td>{p?.name?.[0].family}</td>
+              <td>{p?.id}</td>
+              <td>{p?.gender}</td>
+              <td>
+                <button onClick={() => setPatient(p)}>
+                  Set
+                </button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {patients.map((patient) => (
-              <tr key={patient.id}>
-                <td>{patient?.name?.[0].given}</td>
-                <td>{patient?.name?.[0].family}</td>
-                <td>{patient?.id}</td>
-                <td>{patient?.gender}</td>
-                <td>
-                  <button
-                    onClick={() => setPatient(patient)}
-                  >
-                    Set
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </>
+          ))}
+        </tbody>
+      </table>
+    </Base>
   );
 };
 

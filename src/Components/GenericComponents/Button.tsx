@@ -8,7 +8,10 @@ interface IButton {
 
 const Button = ({ text, handleClick }: IButton) => {
   return (
-    <div onClick={() => handleClick()} className='button'>
+    <div
+      onClick={() => handleClick()}
+      className='btn btn-primary'
+    >
       {text}
     </div>
   );

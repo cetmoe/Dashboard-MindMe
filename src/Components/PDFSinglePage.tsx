@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Document, Page } from 'react-pdf';
-import '../styles/pdf.css';
+// import '../styles/pdf.css';
 
 interface strOrBuf {
   base64string: string | null;

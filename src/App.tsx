@@ -5,6 +5,8 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { pdfjs } from 'react-pdf';
 
 import { useSetRecoilState } from 'recoil';

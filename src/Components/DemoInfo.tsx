@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/sidebar.css';
 import { Patient, Practitioner } from 'fhir/r4';
 
 interface ILoginInfo {

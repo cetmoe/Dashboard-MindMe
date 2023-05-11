@@ -12,6 +12,7 @@
   "dependencies": {
     "@types/fhir": "^0.0.36",
     "@types/node": "^18.16.3",
+    "bootstrap": "5.3.0-alpha3",
     "eslint": "^8.39.0",
     "fhirclient": "^2.5.2",
     "pdfjs-dist": "^3.6.172",

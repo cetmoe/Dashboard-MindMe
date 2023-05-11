@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../styles/sidebar.css';
 import {
   fhirState,
   patientState,
@@ -12,7 +11,7 @@ import {
 import UserPatientInfo from '../DemoInfo';
 import AuthenticateClient from '../AuthenticateClient';
 import Button from './Button';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
   const fhir = useRecoilValue(fhirState);
@@ -27,43 +26,50 @@ const Sidebar = () => {
   };
 
   return (
-    <div className='sidebar flex-column'>
-      <div className='sidebar-title'>MindMe</div>
-      <div className='sidebar-content'>
-        {fhir.client != null ? (
-          <UserPatientInfo
-            patient={patient}
-            practitioner={practitioner}
-          />
-        ) : (
-          <AuthenticateClient />
-        )}
+    <div className='d-flex flex-md-column flex-row flex-nowrap align-items-center sticky-top'>
+      <div className='title mb-4 mt-4'>
+        <h1>MindMe</h1>
       </div>
-      <div className='sidebar-content'>
-        <div className='nav-cat p-l-1'>Handlinger</div>
-        <Link className='sidebar-nav-item' to='/'>
-          Home
-        </Link>
-        <Link className='sidebar-nav-item' to='/patients'>
-          Search for Patients
-        </Link>
-        <Link
-          className='sidebar-nav-item'
-          to='/create-document'
-        >
-          Create Document Reference
-        </Link>
-        <Link className='sidebar-nav-item' to='/documents'>
-          View Patient Documents
-        </Link>
-      </div>
-      <div className='bottom-sidebar'>
+      <ul className='nav nav-underline flex-lg-column flex-row w-100'>
+        <li className='nav-item'>
+          <NavLink className='nav-link link-dark' to='/'>
+            Home
+          </NavLink>
+        </li>
+        <li className='nav-item'>
+          <NavLink
+            className='nav-link link-dark'
+            to='/patients'
+          >
+            Search for Patients
+          </NavLink>
+        </li>
+        <li className='nav-item'>
+          <NavLink
+            className='nav-link link-dark'
+            to='/create-document'
+          >
+            Create Document
+          </NavLink>
+        </li>
+        <li className='nav-item'>
+          <NavLink
+            className='nav-link link-dark'
+            to='/documents'
+          >
+            Patient Documents
+          </NavLink>
+        </li>
+      </ul>
+      <div className='text-center mt-auto p-2'>
         {fhir.client ? (
           <Button
             handleClick={handleLogout}
             text={'Logout'}
           />
-        ) : null}
+        ) : (
+          <AuthenticateClient />
+        )}
       </div>
     </div>
   );

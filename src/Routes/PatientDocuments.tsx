@@ -9,6 +9,7 @@ import {
 } from '../recoilState';
 import Sidebar from '../Components/GenericComponents/Sidebar';
 import { useNavigate } from 'react-router-dom';
+import Base from './Base';
 
 const PatientDocuments = () => {
   const patient = useRecoilValue(patientState);
@@ -61,44 +62,58 @@ const PatientDocuments = () => {
   });
 
   return (
-    <>
-      <Sidebar />
-      <div className='main-container'>
-        <table>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Author</th>
-              <th>Custodian</th>
-              <th>Type</th>
-              <th>Link</th>
+    <Base>
+      <h1>Documents</h1>
+      <p>
+        Documents relevant to{' '}
+        {patient?.name?.[0].given +
+          ' ' +
+          patient?.name?.[0].family}
+        .
+      </p>
+      {patient?.id != undefined ? (
+        <button
+          onClick={() =>
+            FindDocuments(patient.id as string)
+          }
+        >
+          Refresh
+        </button>
+      ) : null}
+      <table className='table table-striped'>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Author</th>
+            <th>Custodian</th>
+            <th>Type</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          {docRefs.list.map((document) => (
+            <tr key={document.id}>
+              <td>{document?.date}</td>
+              <td>{document?.author?.[0].reference}</td>
+              <td>{document?.custodian?.reference}</td>
+              <td>{document?.description}</td>
+              <td>
+                <button
+                  onClick={() => {
+                    const id = document?.id;
+                    if (id) {
+                      navigate(`/document/${id}`);
+                    }
+                  }}
+                >
+                  Load
+                </button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {docRefs.list.map((document) => (
-              <tr key={document.id}>
-                <td>{document?.date}</td>
-                <td>{document?.author?.[0].reference}</td>
-                <td>{document?.custodian?.reference}</td>
-                <td>{document?.description}</td>
-                <td>
-                  <button
-                    onClick={() => {
-                      const id = document?.id;
-                      if (id) {
-                        navigate(`/document/${id}`);
-                      }
-                    }}
-                  >
-                    Load
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </>
+          ))}
+        </tbody>
+      </table>
+    </Base>
   );
 };
 

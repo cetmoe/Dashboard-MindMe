@@ -1,19 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Sidebar from '../Components/GenericComponents/Sidebar';
 import {
   ConstructDocRef,
   DataURLToBase64,
 } from '../HelperFunctions';
-import PDFSinglePage from '../Components/PDFSinglePage';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import { useRecoilValue } from 'recoil';
 import { fhirState, patientState } from '../recoilState';
+import Base from './Base';
 
 const CreateDocument = () => {
-  const [data, setData] = React.useState<string | null>(
-    null
-  );
+  const [data, setData] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const fhir = useRecoilValue(fhirState);
   const patient = useRecoilValue(patientState);
@@ -45,6 +44,8 @@ const CreateDocument = () => {
       file
     );
 
+    setLoading(true);
+
     fhir.client
       ?.create(documentReference, {
         headers: {
@@ -52,27 +53,43 @@ const CreateDocument = () => {
             .VITE_DIPS_SUBSCRIPTION_KEY,
         },
       })
-      .catch((e) => console.log(e));
+      .then(() => setLoading(false))
+      .catch((e) => {
+        console.log(e);
+        setLoading(false);
+      });
   };
 
   return (
-    <>
-      <Sidebar />
-      <div className='main-container'>
+    <Base>
+      <h1>Create Document</h1>
+      <p>Creates a PDF document for the given patient.</p>
+      <label>
+        {'Select a PDF document: '}
         <input
           onChange={HandleFileChange}
           type='file'
           accept='application/pdf'
         />
-        <button
-          onClick={() => PostDocument(data)}
-          disabled={!data || !patient}
-        >
-          Submit PDF
-        </button>
-        {/* <PDFSinglePage base64string={data} /> */}
-      </div>
-    </>
+      </label>
+      <button
+        onClick={() => PostDocument(data)}
+        disabled={!data || !patient || loading}
+      >
+        {loading ? (
+          <>
+            <span
+              className='spinner-border spinner-border-sm'
+              role='status'
+              aria-hidden='true'
+            />
+            Sending...
+          </>
+        ) : (
+          'Submit'
+        )}
+      </button>
+    </Base>
   );
 };
 

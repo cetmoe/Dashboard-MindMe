@@ -1,15 +1,20 @@
 import React from 'react';
-import Sidebar from '../Components/GenericComponents/Sidebar';
 import PatientDemographics from '../Components/PatientDemographics';
+import Base from './Base';
 
 // utvid
 const Dashboard = () => {
   return (
     <>
-      <Sidebar />
-      <div className='main-container'>
+      <Base>
+        <h1>Dashboard</h1>
+        <p>
+          You can select patients from a list, and
+          create/read documents related to that patient.
+        </p>
+
         <PatientDemographics />
-      </div>
+      </Base>
     </>
   );
 };
