@@ -14,6 +14,7 @@ import SearchField from '../Components/GenericComponents/SearchField';
 import { Patient } from 'fhir/r4';
 import { Bundle } from 'fhir/r4';
 import Base from './Base';
+import '../styles/base.css';
 
 const Patients = () => {
   const [patient, setPatient] =
@@ -57,7 +58,6 @@ const Patients = () => {
             <th>Family</th>
             <th>Id</th>
             <th>Gender</th>
-            <th>Set Patient</th>
           </tr>
         </thead>
         <tbody>
@@ -66,19 +66,15 @@ const Patients = () => {
               key={p.id}
               className={
                 patient && p == patient
-                  ? 'bg-warning-subtle'
-                  : 'opacity-75'
+                  ? 'bg-warning-subtle pointer'
+                  : 'opacity-75 pointer'
               }
+              onClick={() => setPatient(p)}
             >
               <td>{p?.name?.[0].given}</td>
               <td>{p?.name?.[0].family}</td>
               <td>{p?.id}</td>
               <td>{p?.gender}</td>
-              <td>
-                <button onClick={() => setPatient(p)}>
-                  Set
-                </button>
-              </td>
             </tr>
           ))}
         </tbody>
