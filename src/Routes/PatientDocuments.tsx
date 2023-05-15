@@ -7,6 +7,7 @@ import {
   documentListState,
   IDocumentListState,
 } from '../recoilState';
+
 import { useNavigate } from 'react-router-dom';
 import Base from './Base';
 
@@ -62,13 +63,20 @@ const PatientDocuments = () => {
 
   return (
     <Base>
-      <h1>Documents</h1>
+      <h1 className='display-5'>Documents</h1>
+      <hr />
       <p>
-        Documents relevant to{' '}
-        {patient?.name?.[0].given +
-          ' ' +
-          patient?.name?.[0].family}
-        .
+        {patient ? (
+          <>
+            Documents relevant to{' '}
+            {patient?.name?.[0].given +
+              ' ' +
+              patient?.name?.[0].family}
+            .
+          </>
+        ) : (
+          'There is currently no patient selected.'
+        )}
       </p>
       {patient?.id != undefined ? (
         <button

@@ -70,12 +70,13 @@ const Patients = () => {
 
   return (
     <Base>
-      <h1>
+      <h1 className='display-5'>
         Patients{' '}
         {patient
           ? '(' + patient?.name?.[0].given + ')'
           : '(No patient selected)'}
       </h1>
+      <hr />
       <p>
         Search for patients by the given fields. All fields
         are optional.

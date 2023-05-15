@@ -66,7 +66,6 @@ const Sidebar = () => {
         ) : (
           <AuthenticateClient />
         )}
-        d
       </div>
     </div>
   );

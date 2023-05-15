@@ -9,6 +9,8 @@ import { useRecoilValue } from 'recoil';
 import { fhirState, patientState } from '../recoilState';
 import Base from './Base';
 import Toast from '../Components/GenericComponents/Toast';
+import Modal from '../Components/GenericComponents/Modal';
+import { Console } from 'console';
 
 const UploadDocument = () => {
   const [data, setData] = useState<string | null>(null);
@@ -75,9 +77,15 @@ const UploadDocument = () => {
     }
   };
 
+  let initialized = false;
+  document.addEventListener('DOMContentLoaded', (e) => {
+    initialized = true;
+  });
+
   return (
     <Base>
-      <h1>Upload Document</h1>
+      <h1 className='display-5'>Upload Document</h1>
+      <hr />
       <p>
         Uploads a PDF document for the given patient to Open
         DIPS journal.
@@ -93,8 +101,9 @@ const UploadDocument = () => {
       />
       <br />
       <button
-        onClick={() => PostDocument(data)}
         className='btn btn-outline-primary mt-2'
+        data-bs-toggle='modal'
+        data-bs-target='#warning'
         disabled={!data || !patient || loading}
       >
         {loading ? (
@@ -103,13 +112,20 @@ const UploadDocument = () => {
               className='spinner-border spinner-border-sm'
               role='status'
               aria-hidden='true'
-            />
+            />{' '}
             Sending...
           </>
         ) : (
           'Submit to Open DIPS'
         )}
       </button>
+      <Modal
+        id={'warning'}
+        fn={() => PostDocument(data)}
+        title='Warning'
+        body='Do not upload documents or sensitive information not relating to the current patient'
+        btnBody='Upload'
+      />
       <Toast
         toastRef={toastRef}
         icon={status ? 'check2-all' : 'x-circle'}
